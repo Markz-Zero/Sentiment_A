@@ -12,7 +12,7 @@ st.subheader("Por favor escribe en el campo de texto la frase que deseas analiza
 translator = Translator()
 
 with st.sidebar:
-               st.subheader("Polaridad y Subjetividad")
+               st.subheader("Polaridad, Subjetividad y Modalidad")
                ("""
                 Polaridad: Indica si el sentimiento expresado en el texto es positivo, negativo o neutral. 
                 Su valor oscila entre -1 (muy negativo) y 1 (muy positivo), con 0 representando un sentimiento neutral.
