@@ -20,6 +20,9 @@ with st.sidebar:
                Subjetividad: Mide cuánto del contenido es subjetivo (opiniones, emociones, creencias) frente a objetivo
                (hechos). Va de 0 a 1, donde 0 es completamente objetivo y 1 es completamente subjetivo.
 
+               Modalidad gramatical: Indica la intención comunicativa del texto, se diferencia entre las siguientes modalidades: enunciativa,
+               exclamativa, imperativa, interrogativa y dubitativa.
+
                  """
                ) 
 
