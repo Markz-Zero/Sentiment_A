@@ -23,19 +23,42 @@ with st.sidebar:
                  """
                ) 
 
+def detectar_modalidad(texto):
+    texto = texto.lower().strip()
+
+    imperativos = ["haz", "ve", "dime", "cierra", "abre", "escucha", "mira", "ven"]
+    dubitativos = ["quizás", "quizas", "tal vez", "probablemente", "puede que"]
+
+    if "¿" in texto or "?" in texto:
+        return "Interrogativa"
+    elif "¡" in texto or "!" in texto:
+        return "Exclamativa"
+    elif any(texto.startswith(v) for v in imperativos):
+        return "Imperativa"
+    elif any(p in texto for p in dubitativos):
+        return "Dubitativa"
+    else:
+        return "Enunciativa"
+
 with st.expander('Analizar texto'):
     text = st.text_input('Escribe por favor: ')
     if text:
 
-        translation = translator.translate(text, src="es", dest="en")
-        trans_text = translation.text
-        blob = TextBlob(trans_text)
-        st.write('Polarity: ', round(blob.sentiment.polarity,2))
-        st.write('Subjectivity: ', round(blob.sentiment.subjectivity,2))
-        x=round(blob.sentiment.polarity,2)
-        if x >= 0.0 and x <=1.0:
-            st.write( 'Es un sentimiento Positivo 😊')
-        elif x >=-1 and x <= 0:
-            st.write( 'Es un sentimiento Negativo 😔')
-        else:
-            st.write( 'Es un sentimiento Neutral 😐')
+      translation = translator.translate(text, src="es", dest="en")
+      trans_text = translation.text
+      blob = TextBlob(trans_text)
+  
+      st.write('Polarity: ', round(blob.sentiment.polarity,2))
+      st.write('Subjectivity: ', round(blob.sentiment.subjectivity,2))
+  
+      modalidad = detectar_modalidad(text)
+      st.write("Modalidad gramatical:", modalidad)
+  
+      x = round(blob.sentiment.polarity,2)
+  
+      if x > 0:
+          st.write('Es un sentimiento Positivo 😊')
+      elif x < 0:
+          st.write('Es un sentimiento Negativo 😔')
+      else:
+          st.write('Es un sentimiento Neutral 😐')
